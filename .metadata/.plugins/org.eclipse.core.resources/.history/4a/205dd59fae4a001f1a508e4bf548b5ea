@@ -1,0 +1,188 @@
+package com.milkyway.serviceimpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.milkyway.dto.CustomerDto;
+import com.milkyway.dto.MilkCollectionDto;
+import com.milkyway.entity.Customer;
+import com.milkyway.entity.MilkCollection;
+import com.milkyway.mapper.CustomerMapper;
+import com.milkyway.repository.CustomerRepository;
+import com.milkyway.service.CustomerService;
+
+@Service
+public class CustomerServiceImpl implements CustomerService {
+
+	@Autowired
+	private CustomerRepository customerRepository;
+
+	/*
+	 * This service method is created to store customer details without
+	 * MilkCollection details.
+	 */
+	@Override
+	public String addNewCustomer(CustomerDto cxDto) {
+		
+		customerRepository.save(CustomerMapper.INSTANCE.toEntity(cxDto));
+		
+		/*Customer cx = new Customer();
+		cx.setCustomerId(cxDto.getCustomerId());
+		cx.setCustomerName(cxDto.getCustomerName());
+		cx.setCustomerPhoneno(cxDto.getCustomerPhoneno());
+		cx.setCustomerVillage(cxDto.getCustomerVillage());
+		customerRepository.save(cx);*/
+		
+		return "Registered Successfully";
+	}
+
+	@Override
+	public List<CustomerDto> getAllCustomers() {
+		List<CustomerDto> customerDtoList = new ArrayList<CustomerDto>();
+		List<Customer> customerList = customerRepository.findAll();
+		
+		for(Customer newCustomer: customerList) {
+			customerDtoList.add(CustomerMapper.INSTANCE.toDto(newCustomer));
+		}
+
+		/*List<CustomerDto> customerDtoList = new ArrayList<CustomerDto>();
+
+		List<Customer> customerList = customerRepository.findAll(); // datebase
+
+		for (Customer newCustomer : customerList) {
+
+			CustomerDto newDto = new CustomerDto();
+
+			newDto.setCustomerId(newCustomer.getCustomerId());
+			newDto.setCustomerName(newCustomer.getCustomerName());
+			newDto.setCustomerPhoneno(newCustomer.getCustomerPhoneno());
+			newDto.setCustomerVillage(newCustomer.getCustomerVillage());
+			
+			List<MoneyDto> moneyDtoList = new ArrayList(); 			
+			List<Money> moneyList = newCustomer.getMoneyDetails();
+			for(Money md: moneyList) {
+				MoneyDto moneyDto = new MoneyDto();
+				moneyDto.setMoneyId(md.getMoneyId());
+				moneyDto.setDate(md.getDate());
+				moneyDto.setBalanceAmount(md.getBalanceAmount());
+				moneyDto.setPaidAmount(md.getBalanceAmount());
+				moneyDto.setNote(md.getNote());
+				moneyDtoList.add(moneyDto);
+			}
+			newDto.setMoneyDetailsDto(moneyDtoList);
+
+			List<MilkCollectionDto> listDto = new ArrayList<MilkCollectionDto>();
+
+			for (MilkCollection newCollection : newCustomer.getMilkCollection()) {
+
+				MilkCollectionDto newMilk = new MilkCollectionDto();
+
+				newMilk.setId(newCollection.getId());
+				newMilk.setDate(newCollection.getDate());
+				newMilk.setTimeOfDay(newCollection.getTimeOfDay());
+				newMilk.setFat(newCollection.getFat());
+				newMilk.setTemperature(newCollection.getTemperature());
+				newMilk.setQuantity(newCollection.getQuantity());
+				newMilk.setRate(newCollection.getRate());
+				newMilk.setTotalAmount(newCollection.getTotalAmount());
+
+				listDto.add(newMilk);
+
+			}
+			newDto.setMilkCollectionDto(listDto);
+			customerDtoList.add(newDto);
+		}*/
+
+		return customerDtoList;
+	}
+
+	@Override
+	public CustomerDto getCustomerByName(String name) {
+
+		CustomerDto newDto = new CustomerDto();
+
+		try {
+			Customer customer = customerRepository.findByCustomerName(name);
+
+			newDto.setCustomerId(customer.getCustomerId());
+			newDto.setCustomerName(customer.getCustomerName());
+			newDto.setCustomerPhoneno(customer.getCustomerPhoneno());
+			newDto.setCustomerVillage(customer.getCustomerVillage());
+
+			List<MilkCollectionDto> listDto = new ArrayList<MilkCollectionDto>();
+
+			for (MilkCollection newCollection : customer.getMilkCollection()) {
+
+				MilkCollectionDto newMilk = new MilkCollectionDto();
+
+				newMilk.setId(newCollection.getId());
+				newMilk.setDate(newCollection.getDate());
+				newMilk.setTimeOfDay(newCollection.getTimeOfDay());
+				newMilk.setFat(newCollection.getFat());
+				newMilk.setTemperature(newCollection.getTemperature());
+				newMilk.setQuantity(newCollection.getQuantity());
+				newMilk.setRate(newCollection.getRate());
+				newMilk.setTotalAmount(newCollection.getTotalAmount());
+
+				listDto.add(newMilk);
+			}
+			newDto.setMilkCollectionDto(listDto);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return newDto;
+	}
+
+	@Override
+	public List<String> getCustomerNames() {
+
+		return customerRepository.getDistictCustomerNames();
+	}
+
+	@Override
+	public String deleteCustomerById(long id) {
+		customerRepository.deleteById(id);
+		return "Deleted";
+	}
+
+	@Override
+	public CustomerDto getCustomerById(long id) {
+		
+		return CustomerMapper.INSTANCE.toDto(customerRepository.findById(id).get());
+		
+		/*CustomerDto dto = new CustomerDto();
+		try {
+
+			Customer cx = customerRepository.getById(id);
+			dto.setCustomerId(cx.getCustomerId());
+			dto.setCustomerName(cx.getCustomerName());
+			dto.setCustomerPhoneno(cx.getCustomerPhoneno());
+			dto.setCustomerVillage(cx.getCustomerVillage());
+
+			List<MilkCollectionDto> mclist = new ArrayList<>();
+			for (MilkCollection mc : cx.getMilkCollection()) {
+				MilkCollectionDto mcDto = new MilkCollectionDto();
+				mcDto.setId(mc.getId());
+				mcDto.setDate(mc.getDate());
+				mcDto.setFat(mc.getFat());
+				mcDto.setQuantity(mc.getQuantity());
+				mcDto.setRate(mc.getRate());
+				mcDto.setTemperature(mc.getTemperature());
+				mcDto.setTimeOfDay(mc.getTimeOfDay());
+				mcDto.setTotalAmount(mc.getTotalAmount());
+
+				mclist.add(mcDto);
+			}
+			dto.setMilkCollectionDto(mclist);
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return dto; */
+	}
+}

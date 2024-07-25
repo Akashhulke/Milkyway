@@ -27,75 +27,17 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public String addNewCustomer(CustomerDto cxDto) {
 		
-		customerRepository.save(CustomerMapper.INSTANCE.toEntity(cxDto));
-		
-		/*Customer cx = new Customer();
-		cx.setCustomerId(cxDto.getCustomerId());
-		cx.setCustomerName(cxDto.getCustomerName());
-		cx.setCustomerPhoneno(cxDto.getCustomerPhoneno());
-		cx.setCustomerVillage(cxDto.getCustomerVillage());
-		customerRepository.save(cx);*/
-		
+		customerRepository.save(CustomerMapper.INSTANCE.toEntity(cxDto));		
 		return "Registered Successfully";
 	}
 
 	@Override
 	public List<CustomerDto> getAllCustomers() {
 		List<CustomerDto> customerDtoList = new ArrayList<CustomerDto>();
-		List<Customer> customerList = customerRepository.findAll();
 		
-		for(Customer newCustomer: customerList) {
+		for(Customer newCustomer: customerRepository.findAll()) {
 			customerDtoList.add(CustomerMapper.INSTANCE.toDto(newCustomer));
 		}
-
-		/*List<CustomerDto> customerDtoList = new ArrayList<CustomerDto>();
-
-		List<Customer> customerList = customerRepository.findAll(); // datebase
-
-		for (Customer newCustomer : customerList) {
-
-			CustomerDto newDto = new CustomerDto();
-
-			newDto.setCustomerId(newCustomer.getCustomerId());
-			newDto.setCustomerName(newCustomer.getCustomerName());
-			newDto.setCustomerPhoneno(newCustomer.getCustomerPhoneno());
-			newDto.setCustomerVillage(newCustomer.getCustomerVillage());
-			
-			List<MoneyDto> moneyDtoList = new ArrayList(); 			
-			List<Money> moneyList = newCustomer.getMoneyDetails();
-			for(Money md: moneyList) {
-				MoneyDto moneyDto = new MoneyDto();
-				moneyDto.setMoneyId(md.getMoneyId());
-				moneyDto.setDate(md.getDate());
-				moneyDto.setBalanceAmount(md.getBalanceAmount());
-				moneyDto.setPaidAmount(md.getBalanceAmount());
-				moneyDto.setNote(md.getNote());
-				moneyDtoList.add(moneyDto);
-			}
-			newDto.setMoneyDetailsDto(moneyDtoList);
-
-			List<MilkCollectionDto> listDto = new ArrayList<MilkCollectionDto>();
-
-			for (MilkCollection newCollection : newCustomer.getMilkCollection()) {
-
-				MilkCollectionDto newMilk = new MilkCollectionDto();
-
-				newMilk.setId(newCollection.getId());
-				newMilk.setDate(newCollection.getDate());
-				newMilk.setTimeOfDay(newCollection.getTimeOfDay());
-				newMilk.setFat(newCollection.getFat());
-				newMilk.setTemperature(newCollection.getTemperature());
-				newMilk.setQuantity(newCollection.getQuantity());
-				newMilk.setRate(newCollection.getRate());
-				newMilk.setTotalAmount(newCollection.getTotalAmount());
-
-				listDto.add(newMilk);
-
-			}
-			newDto.setMilkCollectionDto(listDto);
-			customerDtoList.add(newDto);
-		}*/
-
 		return customerDtoList;
 	}
 
@@ -152,37 +94,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public CustomerDto getCustomerById(long id) {
-		
 		return CustomerMapper.INSTANCE.toDto(customerRepository.findById(id).get());
-		
-		/*CustomerDto dto = new CustomerDto();
-		try {
-
-			Customer cx = customerRepository.getById(id);
-			dto.setCustomerId(cx.getCustomerId());
-			dto.setCustomerName(cx.getCustomerName());
-			dto.setCustomerPhoneno(cx.getCustomerPhoneno());
-			dto.setCustomerVillage(cx.getCustomerVillage());
-
-			List<MilkCollectionDto> mclist = new ArrayList<>();
-			for (MilkCollection mc : cx.getMilkCollection()) {
-				MilkCollectionDto mcDto = new MilkCollectionDto();
-				mcDto.setId(mc.getId());
-				mcDto.setDate(mc.getDate());
-				mcDto.setFat(mc.getFat());
-				mcDto.setQuantity(mc.getQuantity());
-				mcDto.setRate(mc.getRate());
-				mcDto.setTemperature(mc.getTemperature());
-				mcDto.setTimeOfDay(mc.getTimeOfDay());
-				mcDto.setTotalAmount(mc.getTotalAmount());
-
-				mclist.add(mcDto);
-			}
-			dto.setMilkCollectionDto(mclist);
-
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return dto; */
 	}
 }
