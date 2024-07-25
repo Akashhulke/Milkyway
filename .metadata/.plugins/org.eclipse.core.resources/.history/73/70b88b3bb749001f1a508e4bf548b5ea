@@ -1,0 +1,11 @@
+package com.milkyway.mapper;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+@Mapper
+public interface DataMapper {
+	DataMapper INSTANCE = Mappers.getMapper(DataMapper.class);
+	
+
+}

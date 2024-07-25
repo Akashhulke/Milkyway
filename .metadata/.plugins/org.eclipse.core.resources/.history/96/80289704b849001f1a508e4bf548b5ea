@@ -1,0 +1,16 @@
+package com.milkyway.mapper;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+import com.milkyway.dto.CustomerDto;
+import com.milkyway.entity.Customer;
+
+@Mapper
+public interface DataMapper {
+	DataMapper INSTANCE = Mappers.getMapper(DataMapper.class);
+	
+	Customer mapCustomerToCustomerDTO(CustomerDto customerDto);
+	CustomerDto mapCustomerDTOtoCustomer(Customer customer);
+
+}

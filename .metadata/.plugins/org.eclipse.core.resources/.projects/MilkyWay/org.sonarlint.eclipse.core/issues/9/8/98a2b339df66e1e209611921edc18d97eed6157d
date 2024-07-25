@@ -1,0 +1,18 @@
+
+h
+java:S1874•"/Remove this use of "getById"; it is deprecated.(åŒ¤ÿÿÿÿÿ8×¨ù¹¶1HŞRMINORZ
+CODE_SMELL
+Œ
+java:S2293D"YReplace the type specification in this constructor call with the diamond operator ("<>").(î«¼ù8×¨ù¹¶1HßRMINORZ
+CODE_SMELL
+Œ
+java:S2293j"YReplace the type specification in this constructor call with the diamond operator ("<>").(î«¼ù8×¨ù¹¶1HáRMINORZ
+CODE_SMELL
+‘
+java:S2293*"YReplace the type specification in this constructor call with the diamond operator ("<>").(Íæû˜ùÿÿÿÿ8×¨ù¹¶1HãRMINORZ
+CODE_SMELL
+q	java:S106¬"9Replace this use of System.out or System.err by a logger.(¨¶ÑÍşÿÿÿÿ8×¨ù¹¶1HåRMAJORZ
+CODE_SMELL
+g
+java:S37407"/Provide the parametrized type for this generic.(¤–Øìúÿÿÿÿ8×¨ù¹¶1HæRMAJORZ
+CODE_SMELL

@@ -1,0 +1,15 @@
+
+h
+java:S4973F"<Strings and Boxed types should be compared using "equals()".(¥Üåæ8±£º¶1H¬RMAJORZBUG
+b
+java:S1874'"/Remove this use of "getById"; it is deprecated.(­Îı€8±£º¶1H±RMINORZ
+CODE_SMELL
+b
+java:S1874C"/Remove this use of "getById"; it is deprecated.(Õ“›Ü8±£º¶1H²RMINORZ
+CODE_SMELL
+\
+java:S5413G")Verify that "remove()" is used correctly.(¶Ï³Ò8±£º¶1H³RMAJORZ
+CODE_SMELL
+b
+java:S1874w"/Remove this use of "getById"; it is deprecated.(òŞÿÕ8±£º¶1H´RMINORZ
+CODE_SMELL

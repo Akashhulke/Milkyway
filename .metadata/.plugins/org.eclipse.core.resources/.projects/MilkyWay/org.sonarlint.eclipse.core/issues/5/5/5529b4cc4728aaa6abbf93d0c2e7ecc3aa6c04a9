@@ -1,0 +1,9 @@
+
+p	java:S106"9Replace this use of System.out or System.err by a logger.(úººüÿÿÿÿ8Ş¿“º¶1H¹RMAJORZ
+CODE_SMELL
+b
+java:S1874"/Remove this use of "getById"; it is deprecated.(ÆØ·Ô8Ş¿“º¶1HºRMINORZ
+CODE_SMELL
+b
+java:S18740"/Remove this use of "getById"; it is deprecated.(òŞÿÕ8Ş¿“º¶1H»RMINORZ
+CODE_SMELL
